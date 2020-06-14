@@ -38,6 +38,7 @@
             this.tbFileSize = new System.Windows.Forms.TextBox();
             this.lblFileSize = new System.Windows.Forms.Label();
             this.lblEntity = new System.Windows.Forms.Label();
+            this.btnBatch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbPreview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbQuality)).BeginInit();
@@ -46,7 +47,7 @@
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(375, 269);
+            this.btnOpen.Location = new System.Drawing.Point(433, 315);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(120, 30);
             this.btnOpen.TabIndex = 0;
@@ -84,7 +85,7 @@
             // 
             // btnResize
             // 
-            this.btnResize.Location = new System.Drawing.Point(375, 318);
+            this.btnResize.Location = new System.Drawing.Point(433, 365);
             this.btnResize.Name = "btnResize";
             this.btnResize.Size = new System.Drawing.Size(120, 30);
             this.btnResize.TabIndex = 6;
@@ -181,11 +182,22 @@
             this.lblEntity.TabIndex = 15;
             this.lblEntity.Text = "kB";
             // 
+            // btnBatch
+            // 
+            this.btnBatch.Location = new System.Drawing.Point(433, 414);
+            this.btnBatch.Name = "btnBatch";
+            this.btnBatch.Size = new System.Drawing.Size(120, 30);
+            this.btnBatch.TabIndex = 16;
+            this.btnBatch.Text = "Batch";
+            this.btnBatch.UseVisualStyleBackColor = true;
+            this.btnBatch.Click += new System.EventHandler(this.btnBatch_Click);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 462);
+            this.Controls.Add(this.btnBatch);
             this.Controls.Add(this.lblEntity);
             this.Controls.Add(this.tbFileSize);
             this.Controls.Add(this.lblFileSize);
@@ -227,6 +239,7 @@
         private System.Windows.Forms.TextBox tbFileSize;
         private System.Windows.Forms.Label lblFileSize;
         private System.Windows.Forms.Label lblEntity;
+        private System.Windows.Forms.Button btnBatch;
     }
 }
 
