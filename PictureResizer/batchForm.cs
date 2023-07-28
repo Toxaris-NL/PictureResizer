@@ -163,6 +163,7 @@ namespace PictureResizer
                 catch (Exception ex)
                 {
                     row["status"] = "Error";
+                    support.logger.Error("Error converting image. Error message: {0}", ex.Message);
                     dgvBatch.Refresh();
                 }
             }

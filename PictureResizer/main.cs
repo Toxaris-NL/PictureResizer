@@ -2,7 +2,12 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
+
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace PictureResizer
 {
@@ -19,6 +24,7 @@ namespace PictureResizer
             tbFileSize.Text = "1000";
             tbQuality.DataBindings.Add("Value", quality, "Value");
             numQuality.DataBindings.Add("Value", quality, "Value");
+            setupLogger();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -98,6 +104,32 @@ namespace PictureResizer
             {
                 batch.ShowDialog();
             }
+        }
+
+        private void setupLogger()
+        {
+            var loggingSettings = new LoggingConfiguration();
+            var fileTarget = new FileTarget();
+            var logLevel = LogLevel.Error;
+            var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "Toxaris" + Path.DirectorySeparatorChar + "PictureResizer";
+            var logFile = baseDir + Path.DirectorySeparatorChar + "logfile.txt";
+            support.CheckDirectory(baseDir);
+
+            loggingSettings.AddTarget("file", fileTarget);
+            fileTarget.FileName = logFile;
+            fileTarget.Layout = @"${date:format=HH\:mm\:ss} ${level:uppercase=true} ${callsite:className=true:fileName=false:includeSourcePath=false:methodName=false} ${message}";
+            fileTarget.Encoding = Encoding.UTF8;
+            fileTarget.MaxArchiveFiles = 2;
+            fileTarget.ArchiveOldFileOnStartup = true;
+            fileTarget.DeleteOldFileOnStartup = true;
+
+            var rule = new LoggingRule("*", LogLevel.Info, fileTarget);
+            rule.EnableLoggingForLevel(logLevel);
+            loggingSettings.LoggingRules.Add(rule);
+
+            LogManager.Configuration = loggingSettings;
+
+            support.logger = LogManager.GetCurrentClassLogger();
         }
     }
 }
