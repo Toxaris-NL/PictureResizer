@@ -40,7 +40,7 @@ namespace PictureResizer
                 photo = new Photo(Image.FromFile(fileOpen.FileName));
                 photo.SetSourceInfo(fileOpen.FileName);
                 tbOriginal.Text = fileOpen.FileName;
-                tbTarget.Text = support.CreateTargetFilename(fileOpen.FileName);
+                tbTarget.Text = Support.CreateTargetFilename(fileOpen.FileName);
                 int fileSize = (int)(new FileInfo(fileOpen.FileName).Length / 1024);
                 gbPreview.Text = string.Format("Current size: {0} kB", fileSize);
             }
@@ -89,7 +89,7 @@ namespace PictureResizer
         private void tbFileSize_Validating(object sender, CancelEventArgs e)
         {
             string errorMessage;
-            if (!support.ValidInteger(tbFileSize.Text, out errorMessage))
+            if (!Support.ValidInteger(tbFileSize.Text, out errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 MessageBox.Show(errorMessage);
@@ -113,7 +113,7 @@ namespace PictureResizer
             var logLevel = LogLevel.Error;
             var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "Toxaris" + Path.DirectorySeparatorChar + "PictureResizer";
             var logFile = baseDir + Path.DirectorySeparatorChar + "logfile.txt";
-            support.CheckDirectory(baseDir);
+            Support.CheckDirectory(baseDir);
 
             loggingSettings.AddTarget("file", fileTarget);
             fileTarget.FileName = logFile;
@@ -129,7 +129,7 @@ namespace PictureResizer
 
             LogManager.Configuration = loggingSettings;
 
-            support.logger = LogManager.GetCurrentClassLogger();
+            Support.logger = LogManager.GetCurrentClassLogger();
         }
     }
 }
