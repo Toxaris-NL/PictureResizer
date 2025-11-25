@@ -5,7 +5,7 @@ using System.IO;
 
 namespace PictureResizer
 {
-    public static class support
+    public static class Support
     {
         internal static Logger logger;
 

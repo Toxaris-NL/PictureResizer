@@ -116,7 +116,7 @@ namespace PictureResizer
         {
             DataRow newRow = batch.NewRow();
             newRow["source"] = file;
-            newRow["target"] = support.CreateTargetFilename(file);
+            newRow["target"] = Support.CreateTargetFilename(file);
             newRow["quality"] = tbQuality.Text;
             newRow["currentsize"] = (new FileInfo(file).Length / 1024);
             newRow["targetsize"] = tbFileSize.Text;
@@ -127,7 +127,7 @@ namespace PictureResizer
         private void IntegerValidating(object sender, CancelEventArgs e)
         {
             string errorMessage;
-            if (!support.ValidInteger(tbFileSize.Text, out errorMessage))
+            if (!Support.ValidInteger(tbFileSize.Text, out errorMessage))
             {
                 // Cancel the event and select the text to be corrected by the user.
                 MessageBox.Show(errorMessage);
@@ -163,7 +163,7 @@ namespace PictureResizer
                 catch (Exception ex)
                 {
                     row["status"] = "Error";
-                    support.logger.Error("Error converting image. Error message: {0}", ex.Message);
+                    Support.logger.Error("Error converting image. Error message: {0}", ex.Message);
                     dgvBatch.Refresh();
                 }
             }
@@ -193,7 +193,7 @@ namespace PictureResizer
             if (dgvBatch.Columns[e.ColumnIndex].Name.Equals("targetsize") || dgvBatch.Columns[e.ColumnIndex].Name.Equals("quality"))
             {
                 string errorMessage;
-                if (!support.ValidInteger(e.FormattedValue.ToString(), out errorMessage))
+                if (!Support.ValidInteger(e.FormattedValue.ToString(), out errorMessage))
                 {
                     // Cancel the event and select the text to be corrected by the user.
                     dgvBatch.Rows[e.RowIndex].ErrorText = errorMessage;
